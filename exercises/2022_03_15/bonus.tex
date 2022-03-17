@@ -1,0 +1,168 @@
+\documentclass[11pt]{article}
+\usepackage{ {util/personalmacros} }
+\usetikzlibrary{arrows,calc, angles ,patterns}
+
+\title{Exercise 2 Bonus} 
+
+\author{Konstantin Mark\\
+Differential Geometry\\ 
+\textsc{TU Wien}
+}
+\date{17.03.2022}
+
+
+\begin{document}
+\maketitle
+
+
+\section*{5**}
+{\itshape
+The pair of curves $\gamma,\gamma^\epsilon$ from Exercise 4 can be viewed as the tracks of the rear and front wheel of a bicycle (the bycicle frame is always tangent to the trajectory of the rear wheel, while the front wheel can steer).\\
+Given the tracks of the rear and front wheel, can you tell which way the bicycle has travelled?
+}\\~\\
+
+\subsection{Direction of travel}
+
+\begin{remark}
+First of all some discussion on the notion of \textit{direction of travel} is necessary. Clearly there is no definition of \textit{forward travel}, however we can compare the direction of travel of two curves. This leads to the two following two definitions.
+\end{remark}
+\begin{definition}
+Let $\gamma:I\to \mathbb R^n, \delta: J\to \mathbb R^n$ be two different parametrizations of the same curve. Then we define the pair $(\gamma, \delta)$ to be \textbf{unidirectional} if there is a reparametrization $\varphi: I\to J$ that is monotone increasing.
+\end{definition}
+\begin{definition}
+Let $\gamma:I\to \mathbb R^n, \delta: J\to \mathbb R^n$ be two different parametrizations of the same curve. Then we define the pair $(\gamma, \delta)$ to be \textbf{contrary} if there is a reparametrization $\varphi: I\to J$ that is monotone decreasing.
+\end{definition}
+\begin{lemma}
+All pairs $(\gamma,\delta)$ of unit-speed parametrizations of a curve are either unidirectional or contrary.
+\end{lemma}
+\begin{proof}
+Let  $\gamma:I\to \mathbb R^n, \delta: J\to \mathbb R^n$ be unit speed and $\varphi: I\to J$ a reparametrization. Then by the chain rule $$1 =\norm{\frac{\mathrm d}{\mathrm ds}\delta\circ\varphi(s)} = \norm{\dot\delta\circ \varphi(s)}\cdot|\dot\varphi(s)| = |\dot\varphi(s)|.$$
+Thus $\dot\varphi(s)$ is either $-1$ or $1$. Smoothness guarantees that it has to take the same value over all values of $s$. Thus $\varphi$ has either the form $a+s$ or the form $a-s$ for some $a\in \mathbb R$.
+\end{proof}
+\begin{lemma}
+\label{lem:bic_dir}Let $\gamma$ be a regular curve in $\mathbb R^n$, $\epsilon\in \mathbb R$ and define the function $\sigma: x\mapsto -x$. Then the pair $(\gamma^\epsilon, (\gamma\circ\sigma)^{-\epsilon})$ parametrizes the same curve and forms a contrary pair.
+\end{lemma}
+\begin{proof}
+\begin{equation*}
+    (\gamma\circ\sigma)^{-\epsilon}(-t) = \gamma\circ\sigma(-t) -\epsilon\frac{\mathrm d}{\mathrm ds}(\gamma\circ\sigma(-t)) = \gamma(t) + \epsilon\dot\gamma(t)
+\end{equation*}and thus $(\gamma\circ\sigma)^{-\epsilon}) = \gamma^\epsilon\circ\sigma$. Clearly $\sigma$ is monotone decreasing and the pair is contrary.
+\end{proof}
+
+\begin{remark}
+Lemma \ref{lem:bic_dir} shows that to have any proper notion of direction of travel for the bicycle curve we must fix the values for $\epsilon$ to be nonnegative. As $\epsilon = 0$ clearly is not interesting when it comes to direction of travel (ie. any bicycle curve with $\epsilon = 0$ is just the curve itself) from now on, we shall restrict the values of $\epsilon$ to positive real numbers.
+\end{remark}
+
+\subsection{Reformulating the problem}
+
+\begin{remark}
+Let us reformulate the goal: Given two curves $\gamma, \delta$, where we know that there is either $\epsilon>0$ with $\delta = \gamma+\epsilon \dot\gamma$ or $\epsilon'>0$ with $\gamma = \delta+\epsilon'\dot\delta$ (with the possibility that there are both, or also multiple such formulations), can we conclude that there is no contrary reparametrization of the same curve?
+\end{remark}
+\begin{definition}\label{def:bicycle}
+Let $\gamma:I\to \mathbb R^n, \delta: J\to \mathbb R^n$ be two curves. A tuple $(\gamma, \delta, \epsilon, \pm1)$ is said to be a \textbf{bicycle} of the curves $(\gamma, \delta)$ if $\epsilon > 0$ and there are $\varphi, \psi$ monotone and with the same monotonicity with $\delta\circ \psi = (\gamma\circ \varphi)^\epsilon$. $\gamma$ is said to be the \textbf{rear wheel}, $\delta$ is said to be the \textbf{front wheel}. If $\varphi, \psi$ are both monotone increasing, we say the bicycle is \textbf{canonical} and set the last tuple value to $1$, if they are both monotone decreasing, we say the bicycle is \textbf{contrarian} and set the last tuple value to $-1$.
+\end{definition}
+\begin{definition}
+Define $B(\gamma, \delta)$
+the\textbf{ set of bicycles} with rear wheel $\gamma$ and front wheel $\delta$.
+\end{definition}
+\begin{remark}
+Clearly our goal is to find out if $\#|B(\gamma,\delta)| = 1$ when given curves $\gamma,\delta$. Clearly there are curves with $\#|B(\gamma,\delta)| = 0$ (this might even happen if the front wheel curve is parametrized "contrary" to the rear wheel curve). The following section will show that there are curves with $\#|B(\gamma,\delta)| = 2$ and the statement $\#|B(\gamma,\delta)|\leq 1$ posed in the exercise cannot be made in general.
+\end{remark}
+\begin{remark}\label{rem:alg}
+From Definition \ref{def:bicycle} it is evident how we may find out the direction of travel: Look at the tangents of the curves. A necessary requirement for $\gamma$ to be the rear wheel is that its tangent intercepts $\delta$ at a constant distance. 
+\end{remark}
+
+
+
+\subsection{Examples of ambiguity in direction}
+
+\begin{example}[Cycling in a circle]\label{exa:circle}
+Consider the two circles given by the curves \begin{align*}
+\gamma:&
+    \left\{
+    \begin{array}{ccl}
+        \mathbb R& \to & \mathbb R^2 \\
+        t & \mapsto & (\cos(t),\sin(t))^T
+     \end{array}
+     \right.
+     \\
+\delta:&
+    \left\{
+    \begin{array}{ccl}
+        \mathbb R & \to & \mathbb R^2 \\
+        t & \mapsto & 2(\cos(t),\sin(t))^T
+     \end{array}
+     \right.
+\end{align*}
+ shown in Figure \ref{fig:circles}. The tangent to $\gamma(t)$ intersects $\delta(\mathbb R)$ at points $d:= \pm \sqrt{2^2-1^2} = \pm \sqrt3$ away, but with an angle shift of $\varphi := \pm \arccos\frac{\sqrt3}2 = \frac\pi6$. That is, the curves $\gamma, \delta$ satisfy $$\delta(t+\varphi) = \gamma(t) + d\dot\gamma(t).$$ However, again with the function $\sigma: x\mapsto -x$ it also holds that $$(\delta\circ \sigma)(t+\varphi) = (\gamma\circ \sigma)(t) + d (\gamma\circ\sigma)^\cdot(t).$$ Therefore we have $B(\gamma, \delta)= \{(\gamma, \delta, d,1), (\gamma, \delta, d,-1)\}$ and there is both a canonical and a contrarian bicycle.
+\end{example}
+
+\begin{figure}[!h]
+    \centering
+
+    
+\begin{tikzpicture}[scale = 2]
+\def\y{3};
+\coordinate (center) at (2,2);
+\coordinate (lowercenter) at (2,3);
+\coordinate (left) at ($(2,3) - sqrt(\y)*(1,0)$);
+\coordinate (right) at ($(2,3) + sqrt(\y)*(1,0)$);
+
+
+
+\draw[thick, gray] (center) circle (2);
+\draw[thick, gray] (center) circle (1);
+\draw (center) -- (lowercenter); 
+\draw (center) -- (right) ;
+\draw[red] (left) -- (right);
+
+\fill (center) circle (1pt);
+\fill (lowercenter) circle (1pt);
+\fill (left) circle (1pt);
+\fill (right) circle (1pt);
+
+\draw (1,3.2) node {$d = \sqrt{3}$};
+\draw (3,3.2) node {$d = \sqrt3$};
+\draw (1.85,2.5) node {$1$};
+\draw (3.3, 2.6) node {$2$};
+\draw (3,1.5) node {$\gamma$};
+\draw (3,.5) node {$\delta$};
+
+\pic [draw, -, "$\varphi$", angle eccentricity=1.5] {angle = right--center--lowercenter};
+
+\end{tikzpicture}
+
+    \caption{Curves where determination of direction of travel is impossible. The tangent to $\gamma$ has constant-length intersects with $\delta$ at two different points.}
+    \label{fig:circles}
+\end{figure}
+
+\begin{remark}
+Due to the periodicity of the curves, there are many different ways to choose the functions $\varphi, \psi$ in Definition \ref{def:bicycle}, but the definition guarantees that, bar the direction of travel, there is no difference in bicycle by how fast or at what time a certain point is traversed.
+\end{remark}
+\begin{remark}
+If, in Example \ref{exa:circle} we instead choose the curves
+\begin{align*}
+\gamma:&
+    \left\{
+    \begin{array}{ccl}
+        [0,2\pi)& \to & \mathbb R^2 \\
+        t & \mapsto & (\cos(t),\sin(t))^T
+     \end{array}
+     \right.
+     \\
+\delta:&
+    \left\{
+    \begin{array}{ccl}
+        [\frac\pi6,2\pi+\frac\pi6) & \to & \mathbb R^2 \\
+        t & \mapsto & 2(\cos(t),\sin(t))^T
+     \end{array}
+     \right.
+\end{align*}
+then we could only find a canonical bicycle, since starting and endpoints must align.
+\end{remark}
+\begin{example}[Cycling in a straight line]\label{exa:straight}
+Consider $\gamma= \delta$ a straight line. Then $$B(\gamma,\delta) = \{(\gamma, \delta,\epsilon, 1): \epsilon>0\}\cup\{(\gamma,\delta,\epsilon,-1), \epsilon >0\}$$ and there is an infinite number of bicycles.
+\end{example}
+\begin{remark}
+To summarise: The "algorithm" described in \ref{rem:alg} can fail (if the curves are not generated by a bicycle) or produce multiple bicycles in different directions, as seen in Examples \ref{exa:circle} and \ref{exa:straight}. Clearly, these examples work for any dimensions $\geq 2$ as the circle in Example \ref{exa:circle} can be embedded into any $\mathbb R^n$. In dimension $1$, regularity of curves guarantees that any regular curve does not change direction, but there are, as seen in Example \ref{exa:straight} infinitely many bicycles if the curve is infinitely long.
+\end{remark}
+\end{document} 
