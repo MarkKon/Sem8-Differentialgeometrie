@@ -1,0 +1,46 @@
+\documentclass[11pt]{article}
+\usepackage{ {util/personalmacros} }
+\usetikzlibrary{arrows,calc, angles ,patterns}
+
+\title{Exercise 6 Bonus} 
+
+\author{Konstantin Mark\\
+Differential Geometry\\ 
+\textsc{TU Wien}
+}
+\date{26.04.2022}
+
+
+\begin{document}
+\maketitle
+
+\section*{6*}
+{\itshape Let $\gamma$ be a unit-speed spatial curve whose curvature is smaller than 1 and may vanish. Let $(e_1,e_2)$ be a field of orthonormal bases of $\dot\gamma^\perp$. Similarly to the above put \begin{equation*}
+    \sigma: I\times \mathbb R\to \mathbb R^3, \sigma(u,v) = \gamma(u) + e_1\cos v+e_2\sin v.
+\end{equation*}
+\begin{enumerate}
+    \item Compute the Gaussian curvature of this surface.\\ Hint: for computations it might be convenient to write a vector $X=x_0e_0+x_1e_1 + x_2e_2$ in the form $$X = (e_0~e_1~e_2)\left(\begin{array}{c}
+         x_0  \\
+         x_1\\
+         x_2\\
+    \end{array}\right).$$
+    \item Let $\gamma$ be a closed curve. Compute the integral of the Gaussian curvatureover the corresponding surface.
+\end{enumerate}}
+~\\
+\begin{enumerate}
+    \item Clearly, we can take $e_0 = T = \dot \gamma$ to make $(e_0,e_1,e_2)$ a full orthonormal basis (for any parameter $u\in I$). Now $e_1,e_2$ both lie in the plane spanned by $N,B$ and are of unit length. Thus, we can write \begin{equation*}
+        \begin{split}
+            e_1 &= N\sin(\varphi_1(u)) + B\cos\varphi_1(u))\\
+            e_2 &= N\sin(\varphi_2(u)) + B\cos\varphi_2(u))
+        \end{split}
+    \end{equation*}
+    for some functions $\varphi_1,\varphi_2$ that are, due to $(e_1,e_2)$ being a field, differentiable. Then we receive the parametrization\begin{equation*}
+        \sigma(u,v) = \gamma(u) + N\left[\cos v\sin(\varphi_1(u)) + \sin v \sin(\varphi_2(u))\right] + B\left[\cos v\cos(\varphi_2(u)) + \sin v \cos(\varphi_1(u))\right].
+    \end{equation*}
+    Then the derivatives of $\sigma$ take the form:\begin{equation*}
+        \sigma_u = T + \dot N
+    \end{equation*}
+    
+\end{enumerate}
+
+\end{document}
