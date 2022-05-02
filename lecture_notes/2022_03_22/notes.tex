@@ -1,0 +1,256 @@
+\documentclass[11pt]{article}
+\usepackage{ {util/personalmacros} }
+\usepackage{tikz-cd}
+%\usetikzlibrary{arrows,calc, angles ,patterns}
+
+\title{Lecture Notes} 
+
+\author{Konstantin Mark\\
+Differential Geometry\\ 
+\textsc{TU Wien}
+}
+
+
+
+\begin{document}
+\maketitle
+
+\section{Flächen}
+Flächen mit Rand: $\Phi(M\cap V) = \left\{\begin{array}{c}
+     W\cap \{z= 0\}  \\
+     W\cap \{z= 0,y\geq 0\} 
+\end{array}\right.$
+\begin{definition}
+$U\subset \mathbb R^2$ offen, $\sigma: U\to \mathbb R^3$ heißt \textit{Immersion}, wenn $\sigma$ $C^\infty$-differenzierbar und $\mathrm{rng}(J_\sigma) = 2$ überall. Hier ist \begin{equation*}
+    J_\sigma = \left(\begin{array}{ccc}
+         \frac{\partial x}{\partial u}& \frac{\partial x}{\partial v} \\
+         \frac{\partial y}{\partial v}& \frac{\partial y}{\partial v} \\
+         \frac{\partial x}{\partial z}& \frac{\partial z}{\partial v} 
+    \end{array}\right) = \sigma_u, \sigma_v), \sigma(u,v) = \left(\begin{array}{c}
+         x(u,v)\\
+         y(u,v) \\
+         z(u,v)
+    \end{array}\right)
+\end{equation*}
+\end{definition}
+\begin{theorem}
+$M\subseteq \mathbb R^3$ glatte Fläche. Dann gilt: \begin{equation*}
+    \forall p\in M \exists V\subseteq \mathbb R^3, p\in V, \exists \sigma: U\to \mathbb R^3 \text{ Immersion sodass } \sigma (U) = V\cap M
+\end{equation*}
+\end{theorem}
+\begin{proof}
+$\sigma:= \Phi^{-1}|_{W\cap \{z= 0\}}$.
+\end{proof}
+\begin{theorem}\label{thm:immersion}
+Wenn $\sigma: U\to \mathbb R^3$ eine Immersion ist, sodass $\sigma: U \to \sigma(U)$ Diffeomorphismus, dann ist $\sigma(U)$ eine glatte Fläche.
+\end{theorem}
+\begin{remark}
+$\sigma$ injektiv ist hier nicht genug. (Insert Figure 4/1)
+\end{remark}
+\begin{theorem}\label{thm:nullstmg}
+Sei $F: \mathbb R^3\to \mathbb R$ $C^\infty$-glatt, sodass die Implikation $F(x_0,y_0,z_0) = 0\Rightarrow \mathrm{grad} F(x_0,y_0,z_0)\neq 0$ gilt. Dann ist jede Zusammenhangskomponente von $F^{-1}(0)$ eine glatte Fläche.
+\end{theorem}
+\begin{proof}
+Umkehrfunktion
+\end{proof}
+\begin{remark}
+Lokal ist jede glatte Fläche die Nullstellenmenge einer Funktion wie in Satz \ref{thm:nullstlmg}. Global ist dies nicht immer möglich (Bsp: Möbiusband).
+\end{remark}
+\begin{example}
+Die Sphäre $S^2$ als Nullstellenmenge von $x^2+y^2+z^2 -1 =: F(x,y,z)$ erfüllt $\mathrm{grad}F = (2x,2y,2z) \neq 0$ wenn $F=0$.
+\end{example}
+\begin{example}
+Sphärische Koordinaten:\begin{equation*}
+    \sigma:(0,\pi)\times(0,2\pi) \to \mathbb R^3, \sigma(u,v) = (\sin u\cos v, \sin u\sin v, \cos u)
+\end{equation*}
+Das Bild ist $S^2$ ohne einen Meridian.
+\\
+$\sigma$ ist eine Immersion:
+\begin{equation*}
+    \sigma_u = \left(\begin{array}{c}
+         \cos u\cos v \\
+         \cos u\sin v\\
+         -\sin u
+    \end{array}\right), \quad \sigma_v = \left(\begin{array}{c}
+         -\sin u \sin v\\
+         \sin u \cos v \\
+         0
+    \end{array}\right)
+\end{equation*}
+$\mathrm{rng}(\sigma_u,\sigma_v = 2\Leftrightarrow \sigma_v \times \sigma_v\neq 0$. Es gilt \begin{equation*}
+    \sigma_u\times \sigma_v = \left( \begin{array}{c}
+         \sin^2 u\cos v\\
+         \sin^2 u\sin v\\
+         \sin u\cos u
+    \end{array}\right)
+\end{equation*}
+was nur für $\sin u = 0$ (unmöglich da $u\in (0,\pi)$) oder $\sin v = \cos v = 0$ verschwände.
+\end{example}
+\subsection{Surface patches und Koordinatenwechsel}
+
+\begin{definition}
+$M\subseteq \mathbb R^3$ glatte Fläche, $p\in M$. Ein \textit{Surface Patch} um $p$ ist eine Immersion $\sigma: U\to \mathbb R^3, \sigma(U)\subseteq M$, mit $\sigma$ Homöomorphismus, $\sigma(U)\ni p$. (Insert 4/3)
+\end{definition}
+\begin{remark}
+Sei $\varphi: V (\subseteq \mathbb R^2) \to U (\subseteq \mathbb R^2)$ Diffeomorphismus. Dann ist $\sigma\circ \varphi: V\to \mathbb R^3$ auch Immersion bzw. Surface Patch um $p$. Man bezeichnet das auch als \textit{Umparametrisierung} von $\sigma$.
+\end{remark}
+\begin{definition}
+(Insert 4/3). Betrachte Surface Patches $\sigma: U\to M, \tau: V\to M$. Dann bezeichnet für $\Omega:= \sigma(U)\cap \tau(V)$ die Abbildung $\sigma^{-1}\circ \tau: \tau^{-1}(\Omega)\to \sigma^{-1}(\Omega)$ einen \textit{Koordinatenwechsel} (\textit{transition map}).
+\end{definition}
+\begin{example}
+Die \textit{Stereographische Projektion} $(x, y, z)\mapsto (\frac x{1-z}, \frac y{1-z}, 0)$. (Insert 4/5). Die Umkehrabbilung davon ist \begin{equation*}
+    \sigma^N:\left\{\begin{array}{ccc}
+         \mathbb R^2&\to &\mathbb R^3  \\
+         (u,v)&\mapsto & \left(\frac{2u}{u^2+v^2+1}, \frac{2v}{u^2+v^2+1}, \frac{u^2+v^2-1}{u^2+v^2+1}\right) 
+    \end{array}\right.
+\end{equation*}
+Analog ergibt sich die Stereographische Projektion vom Südpol:
+\begin{equation*}
+    \sigma^S:\left\{\begin{array}{ccc}
+         \mathbb R^2&\to &\mathbb R^3  \\
+         (u,v)&\mapsto & \left(\frac{2u}{u^2+v^2+1}, \frac{2v}{u^2+v^2+1}, \frac{1-u^2-v^2}{u^2+v^2+1}\right) 
+    \end{array}\right.
+\end{equation*}
+welche invers zu $(x, y, z)\mapsto (\frac x{1+z}, \frac y{1+z}, 0)$ ist. Nun gilt \begin{equation*}
+    \left(\sigma^S\right)^{-1}\circ \sigma^N(u, v) = \left(\frac u{u^2+v^2}, \frac v{u^2+v^2}\right)
+\end{equation*} als Koordinatenwechsel. Dises ist die Kreisspiegelung. (Insert 4/6)
+\end{example}
+\begin{example}[Drehflächen] Mittels einer Kurve $\gamma(u) = (f(u), 0, g(u))$ um die $z$-Achse gedreht entsteht die folgende Fläche: \begin{equation*}
+    \sigma(u,v) = \left(\begin{array}{c}
+         f(u)\cos v \\ f(u)\sin v\\g(u) 
+    \end{array}\right) \sigma_u = \left(\begin{array}{c}
+         \dot f \cos v\\\dot f \sin v\\ \dot g
+    \end{array}\right), \sigma_v = \left(\begin{array}{c}
+         -f\sin v\\f\cos v\\ 0
+    \end{array}\right)
+\end{equation*}
+Wegen \begin{equation*}
+    \sigma_u\times \sigma_v = \left(\begin{array}{c}
+         -f\dot g \cos v\\ -f\dot g \sin v\\ \dot f f
+    \end{array}\right) = f\left(\begin{array}{c}
+         - \dot g \cos v\\ -\dot g\sin v\\ \dot f
+    \end{array}\right).\norm{\sigma_u\times\sigma_v} = f^2(\dot f^2+ \dot g^2) \neq 0
+\end{equation*}
+ist dies eine Immersion und es entsteht eine glatte Fläche.
+\end{example}
+\begin{example}[Regelflächen]
+Ist eine Vereinigung von Geraden. Betrachte zu $\gamma,\delta$ die Abbildung $\sigma(u,v) := \gamma(u) + v\delta(u)$. Es gilt $\sigma_u = \dot\gamma+v\dot\delta, \sigma_v = \delta$. Mit $\sigma_u\times \sigma_v = \dot\gamma\times \delta + v\dot\delta\times \delta$. Wenn $\delta(u)$ nicht tangential zu $\gamma$ in $\gamma(u)$, so verschwindet der erste Term hier nicht und für eine kleine Umgebung ergibt sich eine Immersion. 
+\end{example}
+\begin{example}[Wendelfläche/Helicoid]
+Betrachte die Regelfläche mit $\gamma(u) = (0,0,u)$, $\delta(u) = (\cos u, \sin u, 0)$. Es gilt 
+\begin{equation*}
+    \sigma(u,v) = \left(
+    \begin{array}{c}
+        v\cos u \\
+        v\sin u \\
+        u
+    \end{array}\right).
+    \quad \sigma_u = \left(
+    \begin{array}{c}
+        -v\sin u\\v\cos u\\ 1
+    \end{array}\right)
+    ,\sigma_v = \left(
+    \begin{array}{c}
+    -v\cos u\\v\sin u\\ 0
+    \end{array}\right). \sigma_u\times \sigma_v = \left(\begin{array}[c] -\sin u\\\cos u\\ -v\end{array}\right)\neq 0.
+\end{equation*}
+\end{example}
+\subsection{Die Tangentialebene}
+\begin{definition}
+Sei $\sigma: U\to \mathbb R^3$ eine lokale Parametrisierung von $M$, $p = \sigma(u_0,v_0)$. Die \textit{Tangentialebene} von $M$ in $p$ ist gegeben durch \begin{equation*}
+    T_pM = \{p+\lambda\sigma_u + \mu \sigma_v | \lambda,\mu \in \mathbb R\}
+\end{equation*}
+\end{definition}
+\begin{lemma}
+$T_pM$ ändert sich nicht bei Umparametrisierung.
+\end{lemma}
+\begin{proof}
+\begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+    V\arrow[r, "\varphi"]\arrow[rr, bend left, "\tau"] & U \arrow[r, "\sigma"]&\mathbb R^3
+    \end{tikzcd}
+    \label{fig:my_label}
+\end{figure}
+Wegen $(\tau_s, \tau_t) = (\sigma_u, \sigma_v)J_\varphi$ gilt $\spann\{\tau_s, \tau_t\} = \spann \{\sigma_n,\sigma_v\}$.
+\end{proof}
+\begin{theorem}
+\begin{equation*}
+    T_p M = \{\dot\gamma(0)| \gamma: I\to \mathbb R^3, \gamma(I)\subseteq M, \gamma(0) = p\}
+\end{equation*}
+\end{theorem}
+
+\begin{proof}~
+\begin{itemize}
+    \item "$\supseteq$": Wenn $\gamma(I)\subseteq M$, dann $\gamma = \sigma\circ \delta, \delta : I\o U$ (Insert 4/7)
+    $\gamma(t) = \sigma(u(t),v(t))$, $\dot\gamma = \dot u\sigma_u + \dot v\sigma_v\in \spann\{\sigma_u,\sigma_v\}$.
+    \item "$\supseteq$"$\lambda\sigma_u + \mu \sigma_v\in \spann\{\sigma_u,\sigma_v\}$. Setzte $u(t) = u_0 + \lambda t, v(t) = v_0 + \mu t$. Dann gilt $\dot\gamma = \dot u \sigma_u + \dot v \sigma_v = \lambda \sigma_u + \mu \sigma_v$.
+\end{itemize}
+\end{proof}
+
+\subsection{Die erste Fundamentalform}
+
+\begin{remark}
+Erinnerung: Symm. Bilinearform auf Vektorraum $V$: \begin{align*}
+    \alpha: V\times V \to \mathbb R\\
+    \alpha(v,w) = \alpha(w,v)\\
+    \alpha(v_1+v_2, w) = \alpha(v_1,w) + \alpha(v_2, w)\\
+    \alpha(\lambda v, w) = \lambda \alpha (v,w)
+\end{align*}
+(und analoger Linearität in $w$).\\
+Eine Quadratische Form ist eine Abbildung $q: V\to \mathbb R, q(v) = \alpha(v,v)$ mit $\alpha$ symmetrische Bilinearform.
+\end{remark}
+\begin{definition}
+$M\subseteq \mathbb R^3$. Die \textbf{erste Fundamentalform} von $M$ in $p\in M$ ist eine symmetrische Bilinearform auf $T_pM$, die durch die Einschränkung vom Skalarprodukt in $\mathbb R^3$ entsteht:\begin{equation*}
+    \mathsf I(X,Y) := \langle X, Y\rangle
+\end{equation*}
+\end{definition}
+\begin{lemma}
+In der Basis $(\sigma_u, \sigma_v)$ von $T_pM$ hat $I$ die Matrix\begin{equation*}
+    \left(\begin{array}{cc}
+        \langle \sigma_u, \sigma_u\rangle & \langle \sigma_u, \sigma_v\rangle\\
+        \langle \sigma_u, \sigma_v\rangle & \langle \sigma_v, \sigma_v\rangle
+    \end{array}\right) =:
+    \left(\begin{array}{cc}
+       E&F\\
+       F&G
+    \end{array}\right)=:G
+\end{equation*}
+\end{lemma}
+\begin{proof}
+Seien $X = a\sigma_u + b\sigma_v, Y =  c\sigma_u + d\sigma_v \in T_p M$. \begin{equation*}
+    I (X,Y) = \langle X,Y\rangle = \langle a\sigma_u + b\sigma_v, c\sigma_u + d\sigma_v\rangle = ac \langle \sigma_u\sigma_u + (ad + bc)\langle \sigma_u,\sigma_v\rangle + bd\langle \sigma_v\sigma_v\rangle = (a,b)G(c,d)^T
+\end{equation*}
+\end{proof}
+\begin{remark}
+Notation:\begin{equation*}
+    \mathsf I = E\D u^2 + 2F\D u\D v + G\D v^2
+\end{equation*}
+Interpretation:  $u= u(t), v= v(t)$, dann ist $\mathsf I$ das Quadrat der Norm $\norm{\dot\gamma}\cdot \D t^2$. $$\D u "=" \dot u\D t \Rightarrow \mathsf I = \underbrace{(U(\dot u)^2 +2F\dot u\dot v + G(\dot v)^2)}_{\norm{\dot u\sigma_u + \dot v\sigma_v}^2 = \norm{\dot \gamma}^2}\D t^2$$
+\end{remark}
+\begin{theorem}
+Ist $\gamma(t) = \sigma(u(t), v(t))$, so ist $L(\gamma)= \int_a^b\sqrt{\mathsf I(\dot\gamma,\dot\gamma)}\D t$.
+\end{theorem}
+\subsection{Flächeninhalt}
+\begin{definition}
+$M\subseteq \mathbb R^3$, $\sigma: U\to \mathbb R^3$ lokale Parametrisierung. $Q:= \sigma(U)$. \begin{equation*}
+    \mathrm{area}(Q):= \int_{U}\norm{\sigma_u\times \sigma_v}\D u\D v.
+\end{equation*}
+\end{definition}
+\begin{lemma}
+$\mathrm{area}(Q)$ ändert sich bei Umparametrisierung nicht. 
+\end{lemma}
+\begin{proof}
+Variablenwechsel bei Integration. 
+\end{proof}
+\begin{remark}
+Kann man wie bei Kurven die Flächen von eingeschriebenen Polyedern berechnen und davon das Supremum oder den Grenzwert nehmen? -> Schwarz'scher Zylinder\\
+Ist $M$ konvex und die eingeschriebenen Polyeder konvex, dann ist der Flächeninhalt gleich dem Supremum der Polyederflächen.
+\end{remark}
+\begin{lemma}
+\begin{equation*}
+    \norm{\sigma_u\times \sigma_v} = \sqrt{EG-F^2} = \sqrt{\det \mathsf I}
+\end{equation*}
+\end{lemma}
+
+\end{document}
