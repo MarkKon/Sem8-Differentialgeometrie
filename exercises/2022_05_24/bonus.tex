@@ -1,0 +1,95 @@
+\documentclass[11pt]{article}
+\usepackage{ {util/personalmacros} }
+\usetikzlibrary{arrows,calc, angles ,patterns}
+
+\title{Exercise 10 Bonus} 
+
+\author{Konstantin Mark\\
+Differential Geometry\\ 
+\textsc{TU Wien}
+}
+\date{23.05.2022}
+
+
+\begin{document}
+\maketitle
+
+\section*{6*}
+{\itshape Show that the map \begin{equation*}
+    \mathbb S^2\to \mathbb R^6, \quad (x,y,z)\mapsto (x^2,y^2,z^2, xy,yz,xz)
+\end{equation*}quotients through the projection $\mathbb S^2\to \mathbb RP^2$ and yields an embedding of $\mathbb RP^2$ into $\mathbb R^6$.\\
+Observe that the image lies in an affine hyperplane, so that $\mathbb RP^2$ is embedded into $\mathbb R^5$.\\
+Show that there is a parallel projection of $\mathbb R^5$ to a hyperplane which yields an embedding of $\mathbb RP^2$ into $\mathbb R^4$.}
+\\~\\
+Denote 
+    $$\varphi: 
+        \begin{cases}
+            \mathbb S^2&\to \mathbb R^6\\
+            (x,y,z)&\mapsto (x^2,y^2,z^2, xy,yz,xz),
+        \end{cases}
+    $$ which is clearly continuous, as 
+    $$\hat\varphi: 
+        \begin{cases}
+            \mathbb R^3&\to \mathbb R^6\\
+            (x,y,z)&\mapsto (x^2,y^2,z^2, xy,yz,xz),
+        \end{cases}
+    $$ is even $C^\infty(\mathbb R^3,\mathbb R^6)$. Denote further
+$\mathbf x\sim \mathbf y :\Leftrightarrow \mathbf x = \mathbf y \lor \mathbf x = -\mathbf y$ and the canonical map 
+$$\varphi: 
+        \begin{cases}
+            \mathbb S^2&\to S^2/_\sim\\
+            x&\mapsto [x]_\sim
+        \end{cases}.
+$$
+Now \begin{align*}
+    \varphi(-\mathbf x) &= \varphi(-(x,y,z)) = \varphi((-x,-y,-z)) \\&= ((-x)^2, (-y)^2,(-z)^2, (-x)(-y), (-y)(-z), (-x)(-z)) \\&= (x^2,y^2,z^2, xy,yz,xz) = \varphi(\mathbf x).
+\end{align*}
+Thus, the map 
+    $$\varphi_\sim: 
+        \begin{cases}
+            \mathbb S^2/_\sim = \mathbb RP^2&\to \mathbb R^6\\
+            [\mathbf x]_\sim&\mapsto\varphi(x)
+        \end{cases}
+    $$
+is well defined. It is also continuous by the properties of the final topology on $\mathbb R P^2$, as $\varphi_\sim$ is continuous if and only if the map $\varphi_\sim\circ p = \varphi$ is continuous.
+\\
+Injectivity follows from $\varphi(a,b,c) = \varphi(x,y,z)\Rightarrow |a| = |x|, |b| = |y|, |c| = |z|$, as well as 
+\begin{align*}
+     \varphi((\pm_1 x,\pm_2 y,\pm_3 z)) &= (x^2,y^2,y^2, (\pm_1x)(\pm_2y), (\pm_2y)(\pm_3z), (\pm_1x)(\pm_3z)) \\&= (x^2,y^2,y^2, \pm_1\pm_2xy, \pm_2y\pm_3yz, \pm_1\pm_3xz)
+\end{align*} and thus $\pm_1\pm_2 = \pm_2y\pm_3 = \pm_1\pm_3 = 1$ or $\pm_1 = \pm_2 = \pm_3\in \{-1,1\}$.
+\\
+Now for $(x,y,z)\in \mathbb S^2$ it holds that $x^2+y^2+z^2 = 1$, and $$\varphi_\sim(\mathbb RP^2)\subseteq\{y\in \mathbb R^6: (1,1,1,0,0,0)\cdot y = 1\} = (0,0,1,0,0,0)^T + \{(1,1,1,0,0,0)^T\}^\perp=:H$$ which is an affine hyperplane. As $H\cong\mathbb R^5$, $\varphi_\sim$ embeds   $\mathbb R P^2$ into $\mathbb R^5$. Using the map \begin{equation*}
+    \iota: 
+        \begin{cases}
+            H&\to \mathbb R^5\\
+            (0,0,1,0,0,0)^T + y&\mapsto (y_1,y_2, y_4,y_5,y_6)^T,
+        \end{cases}
+\end{equation*} consider now also parallel projection $\pi$ along the vector $(1,1,0,0,0)^T$ onto the hyperplane $\{(0,1,0,0,0)^T\}^\perp$. Then we get the map 
+
+$$
+\psi: \pi\circ \iota\circ\varphi_\sim:\begin{cases}
+    \mathbb RP^2&\to \mathbb R^4\\
+    (x,y,z)^T&\mapsto (x^2-y^2, xy,yz,xz)^T.
+\end{cases}$$
+Clearly, as a composition of continuous maps, this is continuous. 
+\\
+Finally, it is also injective: Let $\psi([(x,y,z)]) = \psi([(a,b,c)])$. Assume $x=0$, then $y^2 = b^2$ and $yz = bc$ which already implies $(y,z) = \pm (b,c)$. Similarly, $y= 0$ implies already  $(y,z) = \pm (b,c)$. If $Z=0$ then similarly $2x^2-1 = 2a^2-1$ and $xy = ab$ which already implies $(x,y)= \pm (a,b)$. Assume now thus $x\neq 0, y\neq 0, z \neq 0$. Now it follows that \begin{equation*}
+    \frac ax = \frac yb = \frac cz = \frac xa
+    \end{equation*}
+    and $a = \pm x$ as well as then $(a,b,c) = \pm (x,y,z)$.
+
+
+
+
+
+
+
+
+
+% Notice now, that 
+% \begin{equation*}
+%     1 = (x^2+y^2+z^2)^2 = x^4 + y^4+z^4 + 2(x^2y^2 + y^2z^2 + x^2z^2).
+% \end{equation*} for $(x,y,z)\in \mathbb S^2$
+% The image of $\varphi$ and $\varphi_\sim$ thus lies in a skewed $\mathbb S^5$ (in that the last three components are scaled by $\sqrt2$).  
+
+\end{document}
